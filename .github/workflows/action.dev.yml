@@ -28,10 +28,11 @@ jobs:
       - name: Upload to AWS S3
         run: |
           aws deploy push \
-            --application-name oregon-codedeploy-app \
+            --application-name ${{ vars.CODE_DEPLOY_APP_NAME }} \
             --ignore-hidden-files \
-            --s3-location s3://oregon-deploy-bucket-a/$GITHUB_SHA.conf \
+            --s3-location s3://${{ vars.S3_BUCKET_NAME }}/$GITHUB_SHA.zip \
             --source .
+      
       - name: Any Name Bash Test Step
         shell: bash
         run: |
