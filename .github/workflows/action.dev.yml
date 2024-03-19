@@ -25,6 +25,9 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ vars.AWS_REGION }}
 
+      - name: ls AWS S3
+        run: aws s3 ls
+
       # 빌드 결과물을 S3 버킷에 업로드
       - name: Upload to AWS S3
         run: aws deploy push --application-name ${{ vars.CODE_DEPLOY_APP_NAME }} --ignore-hidden-files --s3-location s3://oregon-deploy-bucket-a/$GITHUB_SHA.zip --source .
