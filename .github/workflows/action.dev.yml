@@ -28,10 +28,16 @@ jobs:
       - name: Upload to AWS S3
         run: |
           aws deploy push \
-            --application-name  oregon-codedeploy-app \
+            --application-name oregon-codedeploy-app \
             --ignore-hidden-files \
             --s3-location s3://oregon-deploy-bucket-a/$GITHUB_SHA.conf \
             --source .
+      - name: Any Name Bash Test Step
+        shell: bash
+        run: |
+          echo "==============="
+          echo "${{ vars.CODE_DEPLOY_APP_NAME }}"
+          echo "==============="
 
       # S3 버킷에 있는 파일을 대상으로 CodeDeploy 실행
       - name: Deploy to AWS EC2 from S3
